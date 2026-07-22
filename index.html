@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="lang" data-si="ගොතටුව කන්දේ පුරාණ විහාරය" data-en="KANDE PURANA VIHARAYA GOTHATUWA">ගොතටුව කන්දේ පුරාණ විහාරය</title>
+    
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="CSS/style.css">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- 🌐 360 Panorama Viewer (Pannellum CDN) Library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+    <style>
+        /* Desktop එකේදී Hamburger බටන් එක හංගන්න */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #ffcc00; /* රන්වන් පාට ඉරි කෑලි */
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+
+        /* Language Switcher Button Styles */
+        .lang-switch-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 3px 8px;
+            border-radius: 20px;
+            border: 1px solid #ffcc00;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: #ffcc00;
+            color: #000;
+        }
+
+        /* Sub-menu styling for nested tabs */
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu .submenu {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: #3d0c0c;
+            list-style: none;
+            padding: 10px;
+            min-width: 160px;
+            border: 1px solid #ffcc00;
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            z-index: 1005;
+        }
+
+        .dropdown-submenu:hover > .submenu {
+            display: block !important;
+        }
+
+        /* Responsive Mobile Styles */
+        @media screen and (max-width: 768px) {
+            nav {
+                position: relative;
+                background: #4a0e17 !important;
+                padding: 12px !important;
+                min-height: 50px;
+                border-bottom: 3px solid #ffcc00;
+                display: block !important;
+            }
+
+            .menu-toggle {
+                display: flex !important;
+                position: absolute;
+                top: 10px;
+                left: 15px;
+                z-index: 10001;
+            }
+
+            nav ul.nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: linear-gradient(135deg, #2b050b, #4a0e17) !important;
+                padding: 60px 0 20px 0 !important;
+                margin: 0 !important;
+                list-style: none !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 10000;
+                box-shadow: 0px 8px 25px rgba(0,0,0,0.5);
+            }
+
+            nav ul.nav-menu.active {
+                display: flex !important;
+            }
+
+            nav ul.nav-menu li {
+                width: 100% !important;
+                position: relative;
+                display: block !important;
+            }
+
+            nav ul.nav-menu li > a {
+                display: block !important;
+                padding: 14px 20px !important;
+                color: #ffffff !important;
+                font-weight: bold;
+                text-decoration: none !important;
+                border-bottom: 1px solid rgba(255, 204, 0, 0.15) !important;
+                font-size: 16px !important;
+                cursor: pointer;
+            }
+
+            nav ul.nav-menu li > a:hover {
+                background: rgba(255, 204, 0, 0.1) !important;
+                color: #ffcc00 !important;
+            }
+
+            nav ul.nav-menu li ul {
+                position: static !important;
+                display: none !important;
+                padding-left: 25px !important;
+                background: #230206 !important;
+                box-shadow: none !important;
+                width: auto !important;
+            }
+
+            nav ul.nav-menu li.open > ul {
+                display: block !important;
+            }
+
+            .dropdown-submenu .submenu {
+                position: static !important;
+                display: none !important;
+                padding-left: 15px !important;
+                background: #180104 !important;
+                border: none !important;
+            }
+
+            .dropdown-submenu.open > .submenu {
+                display: block !important;
+            }
+
+            nav ul.nav-menu li ul a {
+                font-size: 14px !important;
+                padding: 10px 20px !important;
+                color: #ffe680 !important;
+                font-weight: normal;
+            }
+
+            .social-buttons-inline {
+                display: flex !important;
+                flex-direction: column !important;
+                padding: 15px !important;
+                background: transparent !important;
+            }
+            
+            .social-buttons-inline a {
+                margin: 6px 0 !important;
+                text-align: center !important;
+                border-radius: 4px;
+                padding: 10px !important;
+                color: #fff !important;
+            }
+        }
+
+        /* 360 Panorama Container Style */
+        #panorama {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            margin: 30px auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            border: 2px solid #ffcc00;
+            overflow: hidden;
+        }
+
+        .copy-text {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .copy-text:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- පිටුවේ උඩින්ම පිරෙන ප්‍රගති තීරුව (Progress Bar) -->
+    <div id="progress-bar" style="position: fixed; top: 0; left: 0; height: 5px; background: gold; width: 0%; z-index: 9999; transition: width 0.1s;"></div>
+
+    <!-- Dynamic background stars animation -->
+    <div class="stars-background"></div>
+
+    <div class="super-header" style="display: flex; justify-content: space-between; padding: 10px; background: #333; color: #fff; align-items: center; font-size: 14px;">
+        <span id="active-users" class="lang" data-si="🟢 මේ මොහොතේ සජීවීව දත්ත ගණනය වෙමින්..." data-en="🟢 Calculating live users in real-time...">🟢 මේ මොහොතේ සජීවීව දත්ත ගණනය වෙමින්...</span>
+        
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <!-- 🌐 Language Selector Buttons -->
+            <div class="lang-switch-container">
+                <button class="lang-btn active" onclick="switchLanguage('si')" id="btn-si">🇱🇰 SI</button>
+                <button class="lang-btn" onclick="switchLanguage('en')" id="btn-en">🇬🇧 EN</button>
+            </div>
+
+            <!-- 🎼 ශ්‍රව්‍ය දෘශ්‍ය තරංග (Equalizer Audio Active Indicator) -->
+            <div id="audio-visualizer" style="display:none; gap:3px; height:15px; align-items:flex-end;">
+                <span style="width:3px; height:100%; background:gold; animation: bounce 0.5s infinite alternate;"></span>
+                <span style="width:3px; height:60%; background:gold; animation: bounce 0.3s infinite alternate 0.1s;"></span>
+                <span style="width:3px; height:80%; background:gold; animation: bounce 0.7s infinite alternate 0.2s;"></span>
+            </div>
+            <button onclick="speakGreeting()" class="lang" data-si="🔊 ශ්‍රවණය කරන්න" data-en="🔊 Listen Voice" style="background:gold; border:none; padding: 5px 12px; cursor:pointer; font-weight: bold; border-radius:5px; color:#333;">🔊 ශ්‍රවණය කරන්න</button>
+        </div>
+    </div>
+
+    <header>
+        <h1 class="lang" data-si="ගොතටුව කන්දේ පුරාණ විහාරය" data-en="Gothatuwa Kande Purana Viharaya">ගොතටුව කන්දේ පුරාණ විහාරය</h1>
+        <!-- 🌟 ටයිප් වන නවීන බැනරය -->
+        <div id="advanced-typing" style="font-size: 1.8rem; text-align: center; color: #ffcc00; min-height: 40px; margin-top: 15px; font-weight: bold; text-shadow: 2px 2px 5px rgba(0,0,0,0.7);"></div>
+    </header>
+
+    <nav>
+        <div class="menu-toggle" id="mobile-menu-btn">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <ul class="nav-menu" id="nav-links">
+            <li class="dropdown-toggle">
+                <a href="index.html" class="lang" data-si="පසුබිම ▾" data-en="About Us ▾">පසුබිම ▾</a>
+                <ul>
+                    <li><a href="MS1_Abo/about/about1.html" class="lang" data-si="විහාරස්ථානය පිළිබද" data-en="About the Temple">විහාරස්ථානය පිළිබද</a></li>
+                    <li><a href="MS1_Abo/dayaka_sabhawa/dayaka_sabhawa.html" class="lang" data-si="දායක සභාව" data-en="Dayaka Sabhawa">දායක සභාව</a></li>
+                    <li><a href="MS1_Abo/kulagana_samithiya/kulagana_samithiya.html" class="lang" data-si="කුළඟන සමිතිය" data-en="Kulangana Samithiya">කුළඟන සමිතිය</a></li>
+                    
+                    <!-- Nested Tabs: Photo / PDF under Temple Gallery -->
+                    <li class="dropdown-submenu">
+                        <a href="#" class="lang" data-si="පින්තූර එකතුව ▶" data-en="Gallery Collection ▶">පින්තූර එකතුව ▶</a>
+                        <ul class="submenu">
+                            <li><a href="MS1_Abo/temple_jpg_pdf/temple_image" class="lang" data-si="පින්තූර" data-en="Images">පින්තූර</a></li>
+                            <li><a href="MS1_Abo/temple_jpg_pdf/tem.pdf" class="lang" data-si="PDF" data-en="PDF Documents">PDF</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#" onclick="openContactModal(event, 'contactModal1')" class="lang" data-si="විහාරස්ථානය සම්බන්ධ සියළු විමසීම්" data-en="Temple Inquiries">විහාරස්ථානය සම්බන්ධ සියළු විමසීම්</a></li>
+                </ul>
+                
+                <!-- පළමු පොප්-අප් එක (Modal 1) -->
+                <div id="contactModal1" class="modal">
+                  <div class="modal-content">
+                    <span class="close-btn" onclick="closeContactModal('contactModal1')">&times;</span>
+                    <h3 class="lang" data-si="විහාරස්ථානය හා සම්බන්ධ සියළු සබැඳි" data-en="Temple Contact Links">විහාරස්ථානය හා සම්බන්ධ සියළු සබැඳි</h3>
+                    <div class="social-buttons">
+                        <a href="https://www.facebook.com/YOUR_PAGE" target="_blank" class="btn-social fb-btn">Facebook</a>
+                        <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" class="btn-social wa-btn">WhatsApp</a>
+                        <a href="mailto:YOUR_EMAIL@gmail.com" class="btn-social gmail-btn">Gmail</a>
+                        <a href="tel:YOUR_PHONE_NUMBER" class="btn-social contact-btn">Contact</a>
+                    </div>
+                  </div>
+                </div>
+            </li>
+            
+            <li class="dropdown-toggle">
+                <a href="#" class="lang" data-si="දහම් පාසල ▾" data-en="Dhamma School ▾">දහම් පාසල ▾</a>
+                <ul>
+                    <li><a href="MS2_Dha/daham_pasala/daham_pasala.html" class="lang" data-si="ඉතිහාසය" data-en="History">ඉතිහාසය</a></li>
+                    <li><a href="MS2_Dha/guru_mandalaya/guru_mandalaya.html" class="lang" data-si="ඇඳුරු මඩුල්ල" data-en="Academic Staff">ඇඳුරු මඩුල්ල</a></li>
+                    <li><a href="MS2_Dha/library/library.html" class="lang" data-si="පුස්ථකාලය" data-en="Library">පුස්ථකාලය</a></li>
+                    <li><a href="MS2_Dha/sisu_nipunatha/sisu_nipunatha.html" class="lang" data-si="සිසු නිපුනතා" data-en="Student Achievements">සිසු නිපුනතා</a></li>
+                    <li><a href="#" onclick="openContactModal(event, 'contactModal2')" class="lang" data-si="දහම් පාසල හා සම්බන්ධ සියලු විමසීම්" data-en="Dhamma School Inquiries">දහම් පාසල හා සම්බන්ධ සියලු විමසීම්</a></li>
+                    
+                    <!-- Nested Tabs: Photo / PDF under Dhamma School Gallery -->
+                    <li class="dropdown-submenu">
+                        <a href="#" class="lang" data-si="පිංතූර එකතුව ▶" data-en="Photo Gallery ▶">පිංතූර එකතුව ▶</a>
+                        <ul class="submenu">
+                            <li><a href="MS2_Dha/pdf_&_pictures/pictures" class="lang" data-si="පින්තූර" data-en="Images">පින්තූර</a></li>
+                            <li><a href="MS2_Dha/pdf_&_pictures/pdf" class="lang" data-si="PDF" data-en="PDF Documents">PDF</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <!-- දෙවන පොප්-අප් එක (Modal 2) -->
+                <div id="contactModal2" class="modal">
+                  <div class="modal-content">
+                    <span class="close-btn" onclick="closeContactModal('contactModal2')">&times;</span>
+                    <h3 class="lang" data-si="දහම් පාසල හා සම්බන්ධ සියළු සබැඳි" data-en="Dhamma School Contacts">දහම් පාසල හා සම්බන්ධ සියළු සබැඳි</h3>
+                    <div class="social-buttons">
+                        <a href="https://www.facebook.com/YOUR_PAGE" target="_blank" class="btn-social fb-btn">Facebook</a>
+                        <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" class="btn-social wa-btn">WhatsApp</a>
+                        <a href="mailto:YOUR_EMAIL@gmail.com" class="btn-social gmail-btn">Gmail</a>
+                        <a href="tel:YOUR_PHONE_NUMBER" class="btn-social contact-btn">Contact</a>
+                    </div>
+                  </div>
+                </div>
+            </li>
+            
+            <li class="dropdown-toggle">
+                <a href="#" class="lang" data-si="මාසික සහ වාර්ෂික පිංකම් ▾" data-en="Religious Events ▾">මාසික සහ වාර්ෂික පිංකම් ▾</a>
+                <ul>
+                    <li><a href="MS3_Arm/dhana-list" class="lang" data-si="වාර්ෂික දාන ලැයිස්තුව" data-en="Annual Alms Schedule">වාර්ෂික දාන ලැයිස්තුව</a></li>
+                    <li><a href="MS3_Arm/dethis-wyanjana" class="lang" data-si="දෙතිස් වෑංජන පූජාව" data-en="32 Curry Offering">දෙතිස් වෑංජන පූජාව</a></li>
+                    <li><a href="MS3_Arm/gilanpasa" class="lang" data-si="සවස ගිලන්පස පූජාව" data-en="Evening Gilanpasa Offering">සවස ගිලන්පස පූජාව</a></li>
+                </ul>
+            </li>
+            
+            <li class="dropdown-toggle">
+                <a href="#" class="lang" data-si="දේවාලය ▾" data-en="Devalaya ▾">දේවාලය ▾</a>
+                <ul>
+                    <li><a href="#history" class="lang" data-si="ඉතිහාසය" data-en="History">ඉතිහාසය</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown-toggle">
+                <a href="#" class="lang" data-si="පෙර පාසල ▾" data-en="Pre-School ▾">පෙර පාසල ▾</a>
+                <ul>
+                    <li><a href="#Arambhaya_ha_vikashanaya" class="lang" data-si="ආරම්භය හා විකාශනය" data-en="Origins & Evolution">ආරම්භය හා විකාශනය</a></li>
+                    <li><a href="#" class="lang" data-si="ළදරු පාසල් ප්‍රජාව" data-en="Pre-School Community">ළදරු පාසල් ප්‍රජාව</a></li>
+                    <li class="dropdown-submenu">
+                        <a href="#" class="lang" data-si="පින්තූර ▶" data-en="Photos ▶">පින්තූර ▶</a>
+                        <ul class="submenu">
+                            <li><a href="MS5_Pre/PRE_SCHOOL/PRE-PICTURE" class="lang" data-si="පින්තූර" data-en="Images">පින්තූර</a></li>
+                            <li><a href="MS5_Pre/PRE_SCHOOL/PRE_PDF/pre.html" target="_blank" class="lang" data-si="PDF" data-en="PDF Documents">PDF</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" class="lang" data-si="අනාගත දැක්ම" data-en="Future Vision">අනාගත දැක්ම</a></li>
+                    <li><a href="#" onclick="openContactModal(event, 'contactModal3')" class="lang" data-si="ළදරු පාසල හා සම්බන්ධ සියළු විමසීම්" data-en="Pre-School Inquiries">ළදරු පාසල හා සම්බන්ධ සියළු විමසීම්</a></li>
+                </ul>
+                
+                <!-- තෙවන පොප්-අප් එක (Modal 3) -->
+                <div id="contactModal3" class="modal">
+                  <div class="modal-content">
+                    <span class="close-btn" onclick="closeContactModal('contactModal3')">&times;</span>
+                    <h3 class="lang" data-si="ළදරු පාසල හා සම්බන්ධ සියළු සබැඳි" data-en="Pre-School Contact Links">ළදරු පාසල හා සම්බන්ධ සියළු සබැඳි</h3>
+                    <div class="social-buttons">
+                        <a href="https://www.facebook.com/YOUR_PAGE" target="_blank" class="btn-social fb-btn">Facebook</a>
+                        <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" class="btn-social wa-btn">WhatsApp</a>
+                        <a href="mailto:YOUR_EMAIL@gmail.com" class="btn-social gmail-btn">Gmail</a>
+                        <a href="tel:YOUR_PHONE_NUMBER" class="btn-social contact-btn">Contact</a>
+                    </div>
+                  </div>
+                </div>
+            </li>
+            
+            <li class="dropdown-toggle">
+                <a href="#" class="lang" data-si="සම්බන්ධ කරගැනීමට ▾" data-en="Contact Us ▾">සම්බන්ධ කරගැනීමට ▾</a>
+                <ul>
+                    <li><a href="#daana_seettu_contact" class="lang" data-si="සලාක දාන විමසීම්" data-en="Salaka Dhana Inquiries">සලාක දාන විමසීම්</a></li>
+                    <li><a href="#evening_budhdha_puja_or_dethis_wenjana_puja" class="lang" data-si="දෙතිස් වෑංජන පූජාව හෝ ගිලන් පස පූජාව සම්බන්ධ විමසීම්" data-en="Puja Offerings Inquiries">දෙතිස් වෑංජන පූජාව හෝ ගිලන් පස පූජාව සම්බන්ධ විමසීම්</a></li>
+                    <li><a href="#anything_els" class="lang" data-si="වෙනත්" data-en="Other Enquiries">වෙනත්</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container scroll-reveal">
+        <h2 class="lang" data-si="සාදරයෙන් පිළිගනිමු" data-en="Welcome to Our Temple">සාදරයෙන් පිළිගනිමු</h2>
+        <p class="welcome-text lang" data-si="ගොතටුව කන්දේ පුරාණ විහාරස්ථානයේ නිල වෙබ්අඩවිය සදහා පිවිසෙන ඔබ සාදරයෙන් පිළිගනිමු!" data-en="Welcome to the official website of Gothatuwa Kande Purana Viharaya!">ගොතටුව කන්දේ පුරාණ විහාරස්ථානයේ නිල වෙබ්අඩවිය සදහා පිවිසෙන ඔබ සාදරයෙන් පිළිගනිමු!</p>
+
+        <!-- Interactive Enhanced PDF Viewer Section -->
+        <div class="pdf-container-section scroll-reveal">
+            <h3 class="lang" data-si="📄 විහාරස්ථානයේ සඟරාව / PDF ලේඛන" data-en="📄 Temple Magazine & Documents">📄 විහාරස්ථානයේ සඟරාව / PDF ලේඛන</h3>
+            <p class="lang" data-si="පහත බොත්තම් මගින් PDF පිටු ඉදිරියට/පසුපසට මාරු කරන්න හෝ Navigation සක්‍රීය කරන්න" data-en="Use the side buttons or navigation below to slide/turn pages of the document.">පහත බොත්තම් මගින් PDF පිටු ඉදිරියට/පසුපසට මාරු කරන්න හෝ Navigation සක්‍රීය කරන්න</p>
+            
+            <div class="pdf-viewer-wrapper" id="pdfWrapper">
+                <!-- Left Navigation Button -->
+                <button class="pdf-nav-btn pdf-prev-btn" onclick="changePDFPage(-1)" title="පෙර පිටුව (Previous)">&#10094;</button>
+                
+                <!-- PDF Frame Canvas -->
+                <iframe id="pdfFrame" src="MS5_Pre/PRE_SCHOOL/PRE_PDF/pre.pdf#page=1" class="pdf-fx-flip"></iframe>
+                
+                <!-- Right Navigation Button -->
+                <button class="pdf-nav-btn pdf-next-btn" onclick="changePDFPage(1)" title="ඊළඟ පිටුව (Next)">&#10095;</button>
+            </div>
+
+            <!-- PDF Control Toolbar -->
+            <div class="pdf-controls">
+                <div class="pdf-page-indicator">
+                    <span class="lang" data-si="පිටුව:" data-en="Page:">පිටුව:</span> 
+                    <span id="currentPdfPage">1</span>
+                </div>
+                <div>
+                    <button onclick="togglePDFFullscreen()" class="lang btn-fullscreen" data-si="🔍 සම්පූර්ණ තිරයෙන් නරඹන්න" data-en="🔍 View Fullscreen">🔍 සම්පූර්ණ තිරයෙන් නරඹන්න</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔄 360-Degree Panorama Photo View Section -->
+        <div style="text-align: center; margin-top: 20px;">
+            <h3 class="lang" data-si="විහාර මන්දිරය 360° ආවරණය වන දසුන 🔄" data-en="360° Panoramic View of Temple Premises 🔄" style="color: #ffcc00; margin-bottom: 5px;">විහාර මන්දිරය 360° ආවරණය වන දසුන 🔄</h3>
+            <p class="lang" data-si="(රූපය වටේට කරකවා (Drag කර) නැරඹිය හැක)" data-en="(Drag or swipe image to view around)" style="font-size: 13px; color: #ccc; margin-top: 0;">(රූපය වටේට කරකවා (Drag කර) නැරඹිය හැක)</p>
+            <div id="panorama"></div>
+        </div>
+
+        <!-- ⏱️ දහම් ලිපිය සහ කියවීමේ කාලය මනින කොටස -->
+        <div class="article-box scroll-reveal" style="padding: 20px; max-width: 600px; margin: 30px auto; background: rgba(255,255,255,0.05); border-radius: 8px; border: 1px solid rgba(255,204,0,0.2); text-align: left;">
+            <span id="read-time" class="lang" data-si="⏱️ ගණනය කරමින්..." data-en="⏱️ Calculating read time..." style="font-weight: bold; color: #ffcc00; font-size: 0.9rem; display: block; margin-bottom: 10px;">⏱️ ගණනය කරමින්...</span>
+            
+            <article id="dhamma-article">
+                <!-- onclick event එක හරහා Copy කිරීම එකතු කර ඇත -->
+                <h3 class="copy-text lang" onclick="copyArticle()" data-si="උතුම් සත්පුරුෂ ඇසුර (Copy කරන්න මෙතන ඔබන්න)" data-en="Association with Noble Friends (Click to copy)" title="ක්ලික් කර කොපි කරගන්න" style="color: #ffcc00; margin-top:0;">උතුම් සත්පුරුෂ ඇසුර (Copy කරන්න මෙතන ඔබන්න)</h3>
+                <p class="lang" data-si="කල්‍යාණ මිත්‍ර සේවනය නිවන් මඟ සම්පූර්ණ වීමට හේතු වේ. හොඳ මිතුරන් ඇසුරු කිරීම තුළින් යහපත් සිතිවිලි වර්ධනය වන අතර අයහපත් ක්‍රියාවලින් වැළකී සිටීමට හැකියාව ලැබේ." data-en="Association with noble friends leads to the fulfillment of the path to Nibbana. Engaging with good companions cultivates positive thoughts and aids in refraining from unwholesome deeds." style="font-size: 1.1rem; line-height: 1.6;">කල්‍යාණ මිත්‍ර සේවනය නිවන් මඟ සම්පූර්ණ වීමට හේතු වේ. හොඳ මිතුරන් ඇසුරු කිරීම තුළින් යහපත් සිතිවිලි වර්ධනය වන අතර අයහපත් ක්‍රියාවලින් වැළකී සිටීමට හැකියාව ලැබේ.</p>
+            </article>
+        </div>
+
+        <!-- Main Toggle Button -->
+        <div style="text-align: center; margin: 20px 0;">
+            <button id="mainToggleBtn" onclick="toggleBanners()" class="lang" data-si="💛 පින්කම් වැස්ස වස්සන්න 💛" data-en="💛 Shower of Blessings & Merit 💛">
+                💛 පින්කම් වැස්ස වස්සන්න 💛
+            </button>
+        </div>
+
+        <!-- Hide/Show වන Banners Section එක -->
+        <div id="bannerSection" class="banner-container hidden">
+            <!-- Banner 1 -->
+            <div class="banner-card">
+                <img src="IMAGE/banner1.jpg" alt="චෛත්‍ය රාජයාණන් වහන්සේගේ ඉදිකිරීම්">
+                <div class="banner-content">
+                    <h3 class="lang" data-si="චෛත්‍ය රාජයාණන් වහන්සේගේ ඉදිකිරීම්" data-en="Construction of the Stupa">චෛත්‍ය රාජයාණන් වහන්සේගේ ඉදිකිරීම්</h3>
+                    <p class="lang" data-si="විහාරස්ථානයේ නවාංග අලුත්වැඩියාව සහ චෛත්‍ය නිර්මාණය උදෙසා දායක වන්න." data-en="Contribute towards the new renovations and construction of the Stupa.">විහාරස්ථානයේ නවාංග අලුත්වැඩියාව සහ චෛත්‍ය නිර්මාණය උදෙසා දායක වන්න.</p>
+                    <button class="donate-btn lang" 
+                            data-si="ආධාර කිරීමට" 
+                            data-en="Donate Now" 
+                            data-si-alert="ගිණුම් අංකය: 123456789 - BOC" 
+                            data-en-alert="Account No: 123456789 - BOC">
+                      ආධාර කිරීමට
+                    </button>
+                </div>
+            </div> 
+
+            <!-- Banner 2 -->
+            <div class="banner-card">
+                <img src="IMAGE/banner2.jpg" alt="ධර්ම ශාලා ප්‍රතිසංස්කරණය">
+                <div class="banner-content">
+                    <h3 class="lang" data-si="ධර්ම ශාලා ප්‍රතිසංස්කරණය" data-en="Renovation of Preaching Hall">ධර්ම ශාලා ප්‍රතිසංස්කරණය</h3>
+                    <p class="lang" data-si="පින්වත් පිරිස උදෙසා ධර්ම ශාලාව ප්‍රතිසංස්කරණය කිරීමට සම්මාදම් වන්න." data-en="Support the renovation of the Preaching Hall for devotess.">පින්වත් පිරිස උදෙසා ධර්ම ශාලාව ප්‍රතිසංස්කරණය කිරීමට සම්මාදම් වන්න.</p>
+                    <button class="donate-btn lang" data-si="ආධාර කිරීමට" data-en="Donate Now" onclick="alert('ගිණුම් අංකය: 987654321 - Sampath')">ආධාර කිරීමට</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🖼️ ඡායාරූප එකතුව සෙක්ෂන් එක -->
+        <section id="gallery" class="scroll-reveal" style="padding: 40px 20px; border-top: 1px solid rgba(255,204,0,0.2); margin-top: 40px;">
+            <h2 class="lang" data-si="පින්තූර එකතුව" data-en="Photo Gallery" style="color: #ffcc00; margin-top: 0;">පින්තූර එකතුව</h2>
+            <p class="lang" data-si="විහාරස්ථානයේ ඓතිහාසික සහ සුවිශේෂී පිංකම් අවස්ථාවන්ගේ ඡායාරූප" data-en="Historical and special religious events photos of the temple" style="font-size: 15px; color: #ddd; margin-bottom: 25px;">විහාරස්ථානයේ ඓතිහාසික සහ සුවිශේෂී පිංකම් අවස්ථාවන්ගේ ඡායාරූප</p>
+
+            <div style="margin: 20px 0 35px 0;">
+                <button id="open-modal-btn" class="lang" data-si="📸 ඔබ සතු වටිනා ඡායාරූප අප වෙත එවන්න" data-en="📸 Share Your Precious Photos With Us" style="padding: 14px 30px; background: linear-gradient(45deg, #FFD700, #B8860B); border: none; border-radius: 30px; color: #fff; font-weight: bold; cursor: pointer; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(0,0,0,0.4); transition: transform 0.2s, box-shadow 0.2s;">
+                    📸 ඔබ සතු වටිනා ඡායාරූප අප වෙත එවන්න
+                </button>
+            </div>
+
+            <!-- Photos Gallery Container -->
+            <div id="image-gallery" class="gallery"></div>
+        </section>
+
+        <!-- 🌟 REVIEW & RATING SYSTEM -->
+        <div class="review-box scroll-reveal" style="padding: 20px; max-width: 600px; margin: 40px auto; background: rgba(255,255,255,0.05); border-radius: 12px; border: 1px solid rgba(255,204,0,0.3); text-align: left;">
+            <h3 class="lang" data-si="වෙබ් අඩවිය පිළිබඳ ඔබේ අදහස් සහ තරු (Stars) ලබා දෙන්න" data-en="Share Your Feedback & Ratings" style="color: #ffcc00; margin-top: 0; text-align: center;">වෙබ් අඩවිය පිළිබඳ ඔබේ අදහස් සහ තරු (Stars) ලබා දෙන්න</h3>
+            
+            <div class="star-rating" style="text-align: center; margin-bottom: 15px; font-size: 2rem; color: #ccc;">
+                <span class="star" data-value="1" style="cursor:pointer; transition: color 0.2s;">★</span>
+                <span class="star" data-value="2" style="cursor:pointer; transition: color 0.2s;">★</span>
+                <span class="star" data-value="3" style="cursor:pointer; transition: color 0.2s;">★</span>
+                <span class="star" data-value="4" style="cursor:pointer; transition: color 0.2s;">★</span>
+                <span class="star" data-value="5" style="cursor:pointer; transition: color 0.2s;">★</span>
+            </div>
+            
+            <textarea id="review-comment" class="lang-placeholder" data-si-ph="ඔබේ අදහස් සහ යෝජනා මෙහි සටහන් කරන්න..." data-en-ph="Type your thoughts and feedback here..." placeholder="ඔබේ අදහස් සහ යෝජනා මෙහි සටහන් කරන්න..." style="width: 95%; height: 80px; padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-family: inherit; font-size: 14px; resize: none; color: #333;"></textarea>
+            
+            <button onclick="submitReview()" class="lang" data-si="අදහස් යොමු කරන්න" data-en="Submit Review" style="width: 100%; margin-top: 10px; padding: 12px; background: linear-gradient(45deg, #FFD700, #B8860B); border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer; font-size: 1rem;">අදහස් යොමු කරන්න</button>
+            
+            <p id="review-message" style="text-align: center; color: #25d366; font-weight: bold; margin-top: 10px; display: none;"></p>
+        </div>
+    </div>
+
+    <!-- Full screen Photo View (Popup Lightbox) -->
+    <div id="image-popup" class="popup">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <div class="popup-content">
+            <img id="popup-image" src="" alt="temple_picture">
+            <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+            <a class="next" onclick="changeImage(1)">&#10095;</a>
+            <button class="back-to-gallery-btn" onclick="closePopup()">
+                &#11013; ආපසු ප්‍රධාන ගැලරියට (Back)
+            </button>
+        </div>
+    </div>
+
+    <!-- 📷 ඡායාරූප උඩුගත කිරීම සඳහා වන POPUP MODAL -->
+    <div id="uploadModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal-btn">&times;</span>
+            <h3 class="lang" data-si="📸 විහාරස්ථානයේ වටිනා පිංතූර අප වෙත යොමු කරන්න" data-en="📸 Submit Temple Photos" style="color: #ffcc00; margin-top: 0; text-align: center;">📸 විහාරස්ථානයේ වටිනා පිංතූර අප වෙත යොමු කරන්න</h3>
+            <p class="lang" data-si="ඔබ සතු වටිනා පින්තූර අප වෙත එවන්න." data-en="Send us your valuable photos. They will be published after our review." style="font-size: 14px; text-align: center; color: #ddd; margin-bottom: 20px;">ඔබ සතු වටිනා පින්තූර අප වෙත එවන්න. අපගේ සමාලෝචනයෙන් (Review) පසු එය වෙබ් අඩවියට ඇතුළත් කරනු ඇත.</p>
+            
+            <form action="https://formspree.io/f/puranakandeviharayagothatuwa@gmail.com" method="POST" enctype="multipart/form-data" id="photoForm" class="photo-upload-box">
+                <label class="lang" data-si="ඔබේ නම:" data-en="Your Name:" style="display:block; margin-bottom: 5px; font-weight: bold; color: #ffcc00; text-align: left;">ඔබේ නම:</label>
+                <input type="text" name="name" required style="width: 95%; padding: 10px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; color: #333;">
+
+                <label class="lang" data-si="දුරකථන අංකය (අත්‍යවශ්‍ය නොවේ):" data-en="Phone Number (Optional):" style="display:block; margin-bottom: 5px; font-weight: bold; color: #ffcc00; text-align: left;">දුරකථන අංකය (අත්‍යවශ්‍ය නොවේ):</label>
+                <input type="text" name="phone" style="width: 95%; padding: 10px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; color: #333;">
+
+                <label class="lang" data-si="පිංතූරය පිළිබඳ විස්තරයක්:" data-en="Photo Description:" style="display:block; margin-bottom: 5px; font-weight: bold; color: #ffcc00; text-align: left;">පිංතූරය පිළිබඳ විස්තරයක්:</label>
+                <textarea name="description" class="lang-placeholder" data-si-ph="උදා: 2025 වෙසක් පෝය දින පැවැත්වුණු සීල සමාදානය..." data-en-ph="e.g. Vesak Day Observance 2025..." placeholder="උදා: 2025 වෙසක් පෝය දින පැවැත්වුණු සීල සමාදානය..." required style="width: 95%; height: 60px; padding: 10px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; font-family: inherit; resize: none; color: #333;"></textarea>
+
+                <label class="lang" data-si="පිංතූරය තෝරන්න (Choose Photo):" data-en="Select Photo:" style="display:block; margin-bottom: 5px; font-weight: bold; color: #ffcc00; text-align: left;">පිංතූරය තෝරන්න (Choose Photo):</label>
+                <input type="file" name="upload" accept="image/*" required style="margin-bottom: 20px; color: #fff; display: block;">
+
+                <button type="submit" class="lang" data-si="📤 සමාලෝචනය සඳහා යොමු කරන්න" data-en="📤 Submit for Review" style="width: 100%; padding: 12px; background: linear-gradient(45deg, #FFD700, #B8860B); border: none; border-radius: 6px; color: #fff; font-weight: bold; cursor: pointer; font-size: 1rem;">📤 සමාලෝචනය සඳහා යොමු කරන්න</button>
+            </form>
+            
+            <p id="upload-status" style="text-align: center; color: #25d366; font-weight: bold; margin-top: 15px; display: none;"></p>
+        </div>
+    </div>
+
+    <!-- 🔝 Back To Top Floating Button -->
+    <button id="backToTop" title="ඉහළට යන්න" style="display:none; position:fixed; bottom:30px; right:30px; z-index:99; background:linear-gradient(45deg, #FFD700, #B8860B); color:white; border:none; outline:none; width:50px; height:50px; border-radius:50%; cursor:pointer; font-size:20px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); transition: transform 0.2s;"><i class="fas fa-chevron-up"></i></button>
+
+    <!-- Footer Section -->
+    <div class="footer-section">
+        <div class="footer-info">
+            <p class="lang" data-si="ගොතටුව කන්දේ පුරාණ විහාරය" data-en="Gothatuwa Kande Purana Viharaya">ගොතටුව කන්දේ පුරාණ විහාරය</p>
+        </div>
+        <div class="temple-footer-line">
+            <span class="temple-text lang" data-si="© 2026 ගොතටුව කන්දේ පුරාණ විහාරස්ථානය. සියලුම හිමිකම් ඇවිරිණි." data-en="© 2026 Gothatuwa Kande Purana Viharaya. All Rights Reserved.">
+                © 2026 ගොතටුව කන්දේ පුරාණ විහාරස්ථානය. සියලුම හිමිකම් ඇවිරිණි.
+            </span>
+            <span class="developer-text" style="font-size: 14px; color: #ffcc00; display:block; margin-top:5px;">
+                "Ownership and Technical Contribution: <strong style="color: #fff;">[Rev.Bibile Gunananda"]</strong>
+            </span>
+        </div>
+    </div>
+
+    <audio id="templeAudio" src="AUDIO/Buddham_Sharanam_Gachchami.mp3" preload="metadata"></audio>
+
+    <!-- Inline Scripts for PDF & 360 viewer fallback -->
+    <script>
+        let currentPage = 1;
+        const pdfBasePath = "MS5_Pre/PRE_SCHOOL/PRE_PDF/pre.pdf";
+
+        function changePDFPage(direction) {
+            currentPage += direction;
+            if (currentPage < 1) currentPage = 1;
+
+            document.getElementById('currentPdfPage').innerText = currentPage;
+            const pdfFrame = document.getElementById('pdfFrame');
+            pdfFrame.src = pdfBasePath + "#page=" + currentPage;
+        }
+
+        function togglePDFFullscreen() {
+            const elem = document.getElementById("pdfWrapper");
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        function calculateReadTime() {
+            const articleElem = document.getElementById('dhamma-article');
+            if(articleElem) {
+                const articleText = articleElem.innerText;
+                const words = articleText.trim().split(/\s+/).length;
+                const wpm = 150;
+                const minutes = Math.ceil(words / wpm);
+                document.getElementById('read-time').innerText = `⏱️ කියවීමේ කාලය: මිනිත්තු ${minutes} යි පමණ`;
+            }
+        }
+
+        function copyArticle() {
+            const articleText = document.getElementById('dhamma-article').innerText;
+            navigator.clipboard.writeText(articleText).then(() => {
+                alert("ලිපිය සාර්ථකව Copy කරගන්නා ලදී!");
+            });
+        }
+
+        function toggleBanners() {
+            const bannerSec = document.getElementById('bannerSection');
+            if(bannerSec) {
+                bannerSec.classList.toggle('hidden');
+            }
+        }
+
+        window.addEventListener('load', () => {
+            calculateReadTime();
+            if (typeof pannellum !== 'undefined' && document.getElementById('panorama')) {
+                pannellum.viewer('panorama', {
+                    "type": "equirectangular",
+                    "panorama": "css/maluwa.jpg",
+                    "autoLoad": true,
+                    "autoRotate": -2,
+                    "compass": false
+                });
+            }
+        });
+
+        // Navigation Dropdowns Mobile Support
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links');
+
+        if (mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        const dropdowns = document.querySelectorAll('.dropdown-toggle > a');
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    const parentLi = dropdown.parentElement;
+                    if (dropdown.getAttribute('href') === '#') {
+                        e.preventDefault();
+                    }
+                    document.querySelectorAll('.dropdown-toggle').forEach(li => {
+                        if (li !== parentLi) li.classList.remove('open');
+                    });
+                    parentLi.classList.toggle('open');
+                }
+            });
+        });
+
+        const subDropdowns = document.querySelectorAll('.dropdown-submenu > a');
+        subDropdowns.forEach(sub => {
+            sub.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    sub.parentElement.classList.toggle('open');
+                }
+            });
+        });
+
+        function switchLanguage(lang) {
+            const btnSi = document.getElementById('btn-si');
+            const btnEn = document.getElementById('btn-en');
+            if (btnSi) btnSi.classList.toggle('active', lang === 'si');
+            if (btnEn) btnEn.classList.toggle('active', lang === 'en');
+
+            const elements = document.querySelectorAll('.lang');
+            elements.forEach(el => {
+                if (el.dataset[lang]) {
+                    el.innerText = el.dataset[lang];
+                }
+            });
+
+            const placeholders = document.querySelectorAll('.lang-placeholder');
+            placeholders.forEach(el => {
+                const key = lang + 'Ph';
+                if (el.dataset[key]) {
+                    el.placeholder = el.dataset[key];
+                }
+            });
+
+            document.documentElement.lang = lang;
+        }
+    </script>
+
+    <!-- Main External Script File -->
+    <script src="JS/script.js"></script>
+</body>
+</html>
